@@ -4,6 +4,28 @@ module.exports = app => {
   const config = app.config;
   const User = app.db.models.User;
 
+  /**
+  * @api {post} /token  Authentication token
+  * @apiGroup Credentials
+  * @apiParam {String} email User Email
+  * @apiParam {String} password User Password
+  * @apiParamExample {json} Input
+  * {
+  *   "email" : "test@useremail.com",
+  *   "password": "$*(_rfvsefvsfddf"
+  * }
+  *
+  * @apiSuccess {String} token Token of authenticated user
+  * @apiSuccessExample {json} Success
+  *   HTTP/1.1 200 OK
+  *   {
+  *     "token": "23rfvew43dcd53gdvx_wrfdf"
+  *   }
+  *
+  * @apiErrorExample {json} Authentication Error
+  *   HTTP/1.1 401 Unauthorized
+  **/
+
   app.post('/token', (req, res) => {
     if(req.body.email && req.body.password) {
       const email = req.body.email;
